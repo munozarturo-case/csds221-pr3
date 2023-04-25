@@ -17,62 +17,62 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 
 // Get posts
 app.get('/', async (req, res) => {
-    const posts = await loadPostsCollection();
+  const posts = await loadPostsCollection();
 
-    res.send(await posts.find({}).toArray());
+  res.send(await posts.find({}).toArray());
 });
 
 // Add posts
 app.post('/', async (req, res) => {
-    const posts = await loadPostsCollection();
+  const posts = await loadPostsCollection();
 
-    await posts.insertOne({
-        user: req.body.user,
-        body: req.body.body,
-        time: new Date(),
-        likes: 0
-    });
+  await posts.insertOne({
+    user: req.body.user,
+    body: req.body.body,
+    time: new Date(),
+    likes: 0
+  });
 
-    res.status(201).send();
+  res.status(201).send();
 });
 
 
 // Update posts
 app.put('/:id', async (req, res) => {
-    const posts = await loadPostsCollection();
+  const posts = await loadPostsCollection();
 
-    await posts.updateOne({
-        _id: new mongodb.ObjectId(req.params.id)
-    },
+  await posts.updateOne({
+    _id: new mongodb.ObjectId(req.params.id)
+  },
     {
-        $set: {
-            user: req.body.user,
-            body: req.body.body,
-            time: new Date(),
-            likes: req.body.likes
-        }
+      $set: {
+        user: req.body.user,
+        body: req.body.body,
+        time: new Date(),
+        likes: req.body.likes
+      }
     });
 
-    res.status(200).send();
+  res.status(200).send();
 });
 
 
 // Delete posts
 app.delete('/:id', async (req, res) => {
-    const posts = await loadPostsCollection();
+  const posts = await loadPostsCollection();
 
-    await posts.deleteOne({
-        _id: new mongodb.ObjectId(req.params.id)
-    });
+  await posts.deleteOne({
+    _id: new mongodb.ObjectId(req.params.id)
+  });
 
-    res.status(200).send();
+  res.status(200).send();
 });
 
 // Load Posts Collection
 async function loadPostsCollection() {
-    const client = await mongodb.MongoClient.connect(uri, {
-        useNewUrlParser: true
-    });
+  const client = await mongodb.MongoClient.connect(uri, {
+    useNewUrlParser: true
+  });
 
-    return client.db('cluster-us-east').collection('posts');
+  return client.db('cluster-us-east').collection('posts');
 }
