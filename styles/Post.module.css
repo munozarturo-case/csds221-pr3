@@ -7,7 +7,7 @@
 
 .cardHeader {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
 }
 
@@ -41,12 +41,26 @@
     font-size: 14px;
 }
 
+.cardAvatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cardUsername {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
 .cardLikes {
     margin: 0;
     color: #666;
     font-size: 14px;
     display: flex;
-    align-items: center;
+    align-items: right;
 }
 
 .cardLikeButton {

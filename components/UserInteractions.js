@@ -5,7 +5,7 @@ export default function userInteractions({ user, setUser }) {
     return (
         <>
             <div className={styles.mainContainer}>
-                <UserCard username={user.username} />
+                <UserCard username={user.username} likeCount={user.likeCount} postCount={user.postCount} />
             </div>
         </>
     )

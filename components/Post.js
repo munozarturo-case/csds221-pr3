@@ -1,6 +1,8 @@
 import styles from '@/styles/Post.module.css'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+import UserAvatar from '@/components/UserAvatar';
+
 export default function Post({ post }) {
     const formatDate = (date) => {
         const dateObject = new Date(date);
@@ -31,19 +33,23 @@ export default function Post({ post }) {
     };
 
     return (
-        <div class={styles.card}>
-            <div class={styles.cardHeader}>
-                <h2 class={styles.cardTitle}>{post.title}</h2>
-                <p class={styles.cardDate}>{formatDate(post.date)}</p>
+        <div className={styles.card}>
+            <div className={styles.cardHeader}>
+                <div className={styles.cardAvatar}>
+                    <UserAvatar seed={post.user} />
+                </div>
+                <div className={styles.cardUsername}>
+                    <h2 className={styles.cardTitle}>@{post.user}</h2>
+                    <p className={styles.cardDate}>{formatDate(post.date)}</p>
+                </div>
             </div>
-            <div class={styles.cardBody}>
-                <p class={styles.cardText}>{post.body}</p>
+            <div className={styles.cardBody}>
+                <p className={styles.cardText}>{post.body}</p>
             </div>
-            <div class={styles.cardFooter}>
-                <p class={styles.cardUser}>@{post.user}</p>
-                <div class={styles.cardLikes}>
+            <div className={styles.cardFooter}>
+                <div className={styles.cardLikes}>
                     <span>{formatLikes(post.likes)}</span>
-                    <button class={styles.cardLikeButton}>
+                    <button className={styles.cardLikeButton}>
                         <FavoriteIcon />
                     </button>
                 </div>

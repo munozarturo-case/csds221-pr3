@@ -8,7 +8,7 @@
 }
 
 .avatarContainer {
-    border-radius: 50%;
+    border-radius: 8px;
     overflow: hidden;
     height: 60px;
     width: 60px;
@@ -38,4 +38,17 @@
     font-size: 1.2rem;
     margin: 0;
     font-weight: bold;
+}
+
+.statsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.stat {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    color: #555;
 }

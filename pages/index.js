@@ -101,10 +101,10 @@ export default function Home() {
     }
   ]
 
-  const [user, setUser] = React.useState({username: ""});
+  const [user, setUser] = React.useState({username: "", likeCount: 0, postCount: 0});
 
   React.useEffect(() => {
-    setUser({username: UserUtil.getRandomUsername()});
+    setUser({username: UserUtil.getRandomUsername(), likeCount: 0, postCount: 0});
   }, []);
 
   return (
