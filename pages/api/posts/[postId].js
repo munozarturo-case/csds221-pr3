@@ -19,6 +19,23 @@ async function handleGet(req, res) {
     res.send(await posts.findOne({_id: new mongodb.ObjectId(postId)}));
 };
 
+async function handlePost(req, res) {
+    const posts = await loadPostsCollection();
+    const postId = req.query.postId;
+
+    const post = {
+        user: req.body.user,
+        title: req.body.title,
+        body: req.body.body,
+        time: new Date()
+    };
+
+    await posts.updateOne(
+        {_id: new mongodb.ObjectId(postId)},
+        {$set: post}
+    );
+};
+
 async function handleDelete(req, res) {
     const posts = await loadPostsCollection();
     const postId = req.query.postId;
@@ -34,6 +51,9 @@ export default function handler(req, res) {
     switch (req.method) {
         case 'GET':
             handleGet(req, res); // GET
+            break;
+        case 'POST':
+            handlePost(req, res); // POST
             break;
         case 'DELETE':
             handleDelete(req, res); // DELETE
