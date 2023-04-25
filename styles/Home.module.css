@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: left;
+    gap: 10px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
@@ -26,7 +27,7 @@
     justify-content: space-between;
     width: 100%;
     position: fixed;
-    top: 0;
+    top: 80px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -86,4 +87,22 @@
 
 .postsContent::-moz-scrollbar-thumb:hover {
     background: #555;
+}
+
+.refreshButton {
+    border: none;
+    background-color: transparent;
+    color: #666;
+    font-size: 20px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.refreshButton:focus {
+    outline: none;
+}
+
+.refreshButton:hover {
+    color: #4a63e4;
 }
