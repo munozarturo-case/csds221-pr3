@@ -1,0 +1,69 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardTitle {
+    margin: 0;
+}
+
+.cardDate {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.cardBody {
+    margin: 10px 0;
+}
+
+.cardText {
+    margin: 0;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardUser {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.cardLikes {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.cardLikeButton {
+    border: none;
+    background-color: transparent;
+    color: #666;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.cardLikeButton:focus {
+    outline: none;
+}
+
+.cardLikeButton:hover {
+    color: #f00;
+}
