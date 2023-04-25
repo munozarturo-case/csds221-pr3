@@ -8,15 +8,25 @@ const router = express.Router();
 // Connection URI
 const uri = `mongodb+srv://cluster-add:${process.env.MONGODB_PASSWORD}@cluster-us-east.r8dna1m.mongodb.net/?retryWrites=true&w=majority`;
 
+
+// middle ware
+app.use(bodyParser.json());
+
+// cors
+app.use(cors());
+
+// app
+app.listen(port, () => console.log(`Server started on port ${port}`));
+
 // Get posts
-router.get('/', async (req, res) => {
+app.get('/', async (req, res) => {
     const posts = await loadPostsCollection();
 
     res.send(await posts.find({}).toArray());
 });
 
 // Add posts
-router.post('/', async (req, res) => {
+app.post('/', async (req, res) => {
     const posts = await loadPostsCollection();
 
     await posts.insertOne({
@@ -31,7 +41,7 @@ router.post('/', async (req, res) => {
 
 
 // Update posts
-router.put('/:id', async (req, res) => {
+app.put('/:id', async (req, res) => {
     const posts = await loadPostsCollection();
 
     await posts.updateOne({
@@ -51,7 +61,7 @@ router.put('/:id', async (req, res) => {
 
 
 // Delete posts
-router.delete('/:id', async (req, res) => {
+app.delete('/:id', async (req, res) => {
     const posts = await loadPostsCollection();
 
     await posts.deleteOne({
@@ -69,6 +79,3 @@ async function loadPostsCollection() {
 
     return client.db('cluster-us-east').collection('posts');
 }
-
-
-module.exports = router;
