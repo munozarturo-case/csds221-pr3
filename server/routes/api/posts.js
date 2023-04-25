@@ -6,7 +6,7 @@ const mongodb = require('mongodb');
 const router = express.Router();
 
 // Connection URI
-const uri = `mongodb+srv://sudo:${process.env.SUDO_PASSWORD}@vue-express-app.ef67yar.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://cluster-add:${process.env.MONGODB_PASSWORD}@cluster-us-east.r8dna1m.mongodb.net/?retryWrites=true&w=majority`;
 
 // Get posts
 router.get('/', async (req, res) => {
@@ -20,8 +20,10 @@ router.post('/', async (req, res) => {
     const posts = await loadPostsCollection();
 
     await posts.insertOne({
-        text: req.body.text,
-        createdAt: new Date()
+        user: req.body.user,
+        body: req.body.body,
+        time: new Date(),
+        likes: 0
     });
 
     res.status(201).send();
@@ -37,7 +39,10 @@ router.put('/:id', async (req, res) => {
     },
     {
         $set: {
-            text: req.body.text
+            user: req.body.user,
+            body: req.body.body,
+            time: new Date(),
+            likes: req.body.likes
         }
     });
 
@@ -62,7 +67,7 @@ async function loadPostsCollection() {
         useNewUrlParser: true
     });
 
-    return client.db('vue-express').collection('posts');
+    return client.db('cluster-us-east').collection('posts');
 }
 
 
