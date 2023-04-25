@@ -22,7 +22,7 @@ const UserCard = ({ username, postCount, likeCount }) => {
                 <UserAvatar seed={username} />
             </div>
             <div className={styles.detailsContainer}>
-                <p className={styles.username}>@{username}</p>
+                <p className={styles.username}>{`@${username}`}</p>
 
                 <div className={styles.statsContainer}>
                     <p className={styles.stat}>

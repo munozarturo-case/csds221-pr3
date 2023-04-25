@@ -39,7 +39,7 @@ export default function Post({ post }) {
                     <UserAvatar seed={post.user} />
                 </div>
                 <div className={styles.cardUsername}>
-                    <h2 className={styles.cardTitle}>@{post.user}</h2>
+                    <h2 className={styles.cardTitle}>{`@${post.user}`}</h2>
                     <p className={styles.cardDate}>{formatDate(post.date)}</p>
                 </div>
             </div>

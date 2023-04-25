@@ -116,7 +116,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Thought Share - @{user.username}</title>
+        <title>{`Thought Share - @${user.username}`}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/brain.png"></link>
       </Head>
@@ -129,7 +129,7 @@ export default function Home() {
         <h1>Thought Share</h1>
         <button onClick={handleFeedRefresh()} className={styles.refreshButton}>
           <SyncIcon  />
-          Refresh Feed
+          {/* Refresh Feed */}
         </button>
       </header>
       <main className={styles.pageContent}>
