@@ -1,7 +1,13 @@
-import Head from 'next/head'
-import PostBoard from '@/components/PostBoard'
 import React from 'react';
+import Head from 'next/head'
+import Image from 'next/image'
+
+import PostBoard from '@/components/PostBoard'
+import UserInteractions from '@/components/UserInteractions';
+
 import styles from '@/styles/Home.module.css'
+
+import UserUtil from '@/utils/user';
 
 export default function Home() {
   const posts = [
@@ -95,19 +101,29 @@ export default function Home() {
     }
   ]
 
+  const [user, setUser] = React.useState({
+    username: UserUtil.getRandomUsername(),
+  });
+
   return (
     <>
       <Head>
         <title>Picshure</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="@/public/camera.png"></link>
       </Head>
       <header className={styles.mainHeader}>
+        <Image 
+          src="/camera.png"
+          width={50}
+          height={50}
+        />
         <h1>Picshure</h1>
       </header>
       <main className={styles.pageContent}>
         <div className={styles.content}>
           <div className={styles.userInteractions}>
-            <button>Share with the world</button>
+            <UserInteractions />
           </div>
           <div className={styles.postsContent}>
             <PostBoard posts={posts} />
