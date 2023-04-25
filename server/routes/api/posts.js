@@ -5,6 +5,7 @@ const mongodb = require('mongodb');
 
 const router = express.Router();
 
+// Connection URI
 const uri = `mongodb+srv://sudo:${process.env.SUDO_PASSWORD}@vue-express-app.ef67yar.mongodb.net/?retryWrites=true&w=majority`;
 
 // Get posts
@@ -25,6 +26,24 @@ router.post('/', async (req, res) => {
 
     res.status(201).send();
 });
+
+
+// Update posts
+router.put('/:id', async (req, res) => {
+    const posts = await loadPostsCollection();
+
+    await posts.updateOne({
+        _id: new mongodb.ObjectId(req.params.id)
+    },
+    {
+        $set: {
+            text: req.body.text
+        }
+    });
+
+    res.status(200).send();
+});
+
 
 // Delete posts
 router.delete('/:id', async (req, res) => {
