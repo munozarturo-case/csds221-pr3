@@ -101,9 +101,11 @@ export default function Home() {
     }
   ]
 
-  const [user, setUser] = React.useState({
-    username: UserUtil.getRandomUsername(),
-  });
+  const [user, setUser] = React.useState({username: ""});
+
+  React.useEffect(() => {
+    setUser({username: UserUtil.getRandomUsername()});
+  }, []);
 
   return (
     <>
@@ -123,7 +125,7 @@ export default function Home() {
       <main className={styles.pageContent}>
         <div className={styles.content}>
           <div className={styles.userInteractions}>
-            <UserInteractions />
+            <UserInteractions user={user} setUser={setUser} />
           </div>
           <div className={styles.postsContent}>
             <PostBoard posts={posts} />
