@@ -1,15 +1,15 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const mongodb = require('mongodb');
+const mongodb = require("mongodb");
 
-const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster-us-east.r8dna1m.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster-us-east.nfcaz0w.mongodb.net/?retryWrites=true&w=majority`;
 
 async function loadPostsCollection() {
     const client = await mongodb.MongoClient.connect(uri, {
         useNewUrlParser: true
     });
 
-    return client.db('cluster-us-east').collection('posts');
+    return client.db("cluster-us-east").collection("posts");
 };
 
 async function handleGet(req, res) {
@@ -51,16 +51,17 @@ async function handleDelete(req, res) {
 
 export default function handler(req, res) {
     switch (req.method) {
-        case 'GET':
+        case "GET":
             handleGet(req, res); // GET
             break;
-        case 'POST':
+        case "POST":
             handlePost(req, res); // POST
             break;
-        case 'DELETE':
+        case "DELETE":
             handleDelete(req, res); // DELETE
             break;
         default:
+            res.setHeader("Allow", ["GET", "POST", "DELETE"]);
             res.status(405).end(); // method not allowed
             break;
     }
