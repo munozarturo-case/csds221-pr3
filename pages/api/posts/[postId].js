@@ -34,6 +34,8 @@ async function handlePost(req, res) {
         {_id: new mongodb.ObjectId(postId)},
         {$set: post}
     );
+
+    res.status(201).send();
 };
 
 async function handleDelete(req, res) {
