@@ -3,19 +3,16 @@ require('dotenv').config();
 const express = require('express');
 const mongodb = require('mongodb');
 
-const router = express.Router();
-
-// Connection URI
+const port = process.env.PORT || 3000;
 const uri = `mongodb+srv://cluster-add:${process.env.MONGODB_PASSWORD}@cluster-us-east.r8dna1m.mongodb.net/?retryWrites=true&w=majority`;
 
-
+// set up app
+const app = express();
 // middle ware
 app.use(bodyParser.json());
-
 // cors
 app.use(cors());
-
-// app
+// setup port
 app.listen(port, () => console.log(`Server started on port ${port}`));
 
 // Get posts
