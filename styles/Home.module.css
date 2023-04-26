@@ -92,11 +92,18 @@
 .refreshButton {
     border: none;
     background-color: transparent;
-    color: #666;
+    color: #fff;
+    cursor: pointer;
     font-size: 20px;
     margin-left: 5px;
     display: flex;
     align-items: center;
+}
+
+.refreshFeedIcon {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
 }
 
 .refreshButton:focus {
@@ -105,4 +112,5 @@
 
 .refreshButton:hover {
     color: #4a63e4;
+
 }

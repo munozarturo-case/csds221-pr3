@@ -1,7 +1,43 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: top;
-    height: 100vh;
+    width: 100%;
 }
+
+.worldIcon {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.shareWithWorldButton {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    margin-left: 5px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    border: 2px solid #ffffffa4;
+    border-radius: 10px;
+    width: 100%;
+    padding: 5px 0px 5px 5px;
+}
+
+.shareWithWorldButton:focus {
+    outline: none;
+}
+
+.shareWithWorldButton:hover {
+    color: #90EE90;
+    border: 2px solid #90EE90;
+}
+

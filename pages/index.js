@@ -103,14 +103,14 @@ export default function Home() {
     }
   ]
 
-  const [user, setUser] = React.useState({username: "", likeCount: 0, postCount: 0});
+  const [user, setUser] = React.useState({username: '', likeCount: 0, postCount: 0});
 
   React.useEffect(() => {
     setUser({username: UserUtil.getRandomUsername(), likeCount: 0, postCount: 0});
   }, []);
 
   const handleFeedRefresh = () => {
-    console.log("Feed Refreshed");
+    console.log("Refreshing Feed...");
   }
 
   return (
@@ -127,9 +127,8 @@ export default function Home() {
           height={50}
         />
         <h1>Thought Share</h1>
-        <button onClick={handleFeedRefresh()} className={styles.refreshButton}>
-          <SyncIcon  />
-          {/* Refresh Feed */}
+        <button onClick={handleFeedRefresh} className={styles.refreshButton}>
+          <SyncIcon className={styles.refreshFeedIcon} />
         </button>
       </header>
       <main className={styles.pageContent}>
