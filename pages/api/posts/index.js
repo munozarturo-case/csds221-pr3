@@ -1,8 +1,10 @@
 require("dotenv").config();
 
+import Utils from "../utils";
+
 const mongodb = require("mongodb");
 
-const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster-us-east.r8dna1m.mongodb.net/?retryWrites=true&w=majority`;
+const uri = Utils.getDatabaseURI(process.env.MONGODB_USER, process.env.MONGODB_PASS);
 
 async function loadPostsCollection() {
     const client = await mongodb.MongoClient.connect(uri, {
@@ -13,24 +15,11 @@ async function loadPostsCollection() {
 };
 
 async function handleGet(req, res) {
-    const posts = await loadPostsCollection();
 
-    res.send(await posts.find({}).toArray());
 };
 
 async function handlePost(req, res) {
-    const posts = await loadPostsCollection();
-
-    const post = {
-        user: req.body.user,
-        title: req.body.title,
-        body: req.body.body,
-        time: new Date()
-    };
-
-    await posts.insertOne(post);
-
-    res.status(201).send();
+    
 };
 
 export default function handler(req, res) {

@@ -1,8 +1,10 @@
 require("dotenv").config();
 
+import Utils from "../utils";
+
 const mongodb = require("mongodb");
 
-const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster-us-east.nfcaz0w.mongodb.net/?retryWrites=true&w=majority`;
+const uri = Utils.getDatabaseURI(process.env.MONGODB_USER, process.env.MONGODB_PASS);
 
 async function loadPostsCollection() {
     const client = await mongodb.MongoClient.connect(uri, {
@@ -13,40 +15,15 @@ async function loadPostsCollection() {
 };
 
 async function handleGet(req, res) {
-    const posts = await loadPostsCollection();
-    const postId = req.query.postId;
 
-    res.send(await posts.findOne({_id: new mongodb.ObjectId(postId)}));
 };
 
 async function handlePost(req, res) {
-    const posts = await loadPostsCollection();
-    const postId = req.query.postId;
 
-    const post = {
-        user: req.body.user,
-        title: req.body.title,
-        body: req.body.body,
-        time: new Date()
-    };
-
-    await posts.updateOne(
-        {_id: new mongodb.ObjectId(postId)},
-        {$set: post}
-    );
-
-    res.status(201).send();
 };
 
 async function handleDelete(req, res) {
-    const posts = await loadPostsCollection();
-    const postId = req.query.postId;
-
-    await posts.deleteOne({
-        _id: new mongodb.ObjectId(postId)
-    });
-
-    res.status(200).send();
+    
 };
 
 export default function handler(req, res) {
