@@ -7,6 +7,8 @@ import React from 'react';
 
 import Thought from './Thought';
 
+const toastr = require('toastr');
+
 export default function UserInteractions({ user, setUser, posts, setPosts, fetchPosts }) {
     const [showPopup, setShowPopup] = React.useState(false);
     const [postTitle, setPostTitle] = React.useState('');
@@ -23,31 +25,44 @@ export default function UserInteractions({ user, setUser, posts, setPosts, fetch
     };
 
     const handleConfirm = () => {
-        const newPost = {
-            user: user.username,
-            title: postTitle,
-            body: postBody,
-            date: new Date(),
-            likes: 0,
-        };
+        if (postTitle === '' && postBody === '') {
+            toastr.info("You can't share an empty thought.");
+            showPopup(false);
+        } else {
+            const newPost = {
+                user: user.username,
+                title: postTitle,
+                body: postBody,
+                date: new Date(),
+                likes: 0,
+            };
 
-        fetch('/api/posts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newPost),
-        });
-
-        setPosts([newPost, ...posts]);
-
-        setShowPopup(false);
-        setPostTitle('');
-        setPostBody('');
-
-        setTimeout(() => {
-            fetchPosts();
-        }, 2000);
+            if (postTitle === '' || postBody === '') {
+                if (postTitle === '') {
+                    toastr.info("You can't share a thought without a title.");
+                } else {
+                    toastr.info("You can't share a thought without a body.");
+                }
+            } else {
+                fetch('/api/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newPost),
+                });
+        
+                setPosts([newPost, ...posts]);
+        
+                setShowPopup(false);
+                setPostTitle('');
+                setPostBody('');
+        
+                setTimeout(() => {
+                    fetchPosts();
+                }, 2000);
+            }
+        }
     };
 
     return (
