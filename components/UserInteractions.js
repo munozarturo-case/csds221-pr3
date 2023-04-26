@@ -5,13 +5,15 @@ import PublicIcon from '@mui/icons-material/Public';
 
 import React from 'react';
 
+import Thought from './Thought';
+
 export default function UserInteractions({ user, setUser }) {
     const [showPopup, setShowPopup] = React.useState(false);
     const [postTitle, setPostTitle] = React.useState('');
     const [postBody, setPostBody] = React.useState('');
 
     const handleShareWithWorld = () => {
-        setShowPopup(true);
+        setShowPopup(!showPopup);
     };
 
     const handleCancel = () => {
@@ -35,11 +37,21 @@ export default function UserInteractions({ user, setUser }) {
                     <UserCard username={user.username} likeCount={user.likeCount} postCount={user.postCount} />
                 </div>
                 <div className={styles.container}>
-                    <button className={styles.shareWithWorldButton} onClick={handleShareWithWorld}>
+                    {(!showPopup && <button className={styles.shareWithWorldButton} onClick={handleShareWithWorld}>
                         <PublicIcon className={styles.worldIcon} />
                         Share a thought!
-                    </button>
+                    </button>)}
                 </div>
+                {(showPopup && <div className={styles.thoughtContainer}>
+                    <Thought 
+                        title={postTitle}
+                        body={postBody}
+                        setTitle={setPostTitle}
+                        setBody={setPostBody} 
+                        handleConfirm={handleConfirm}
+                        handleCancel={handleCancel}
+                    />
+                </div>)}
             </div>
         </>
     )
