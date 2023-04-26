@@ -4,10 +4,10 @@ export default function Thought({ title, body, setTitle, setBody, handleConfirm,
     return <>
         <div className={styles.thoughtContainer}>
             <div className={styles.thoughtTitle}>
-                <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
+                <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="What's on your mind?" />
             </div>
             <div className={styles.thoughtBody}>
-                <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="What's on your mind?" />
+                <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="Elaborate..." />
             </div>
             <div className={styles.thoughtButtons}>
                 <button onClick={handleCancel}>Cancel</button>
