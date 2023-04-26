@@ -35,6 +35,14 @@ export default function Post({ post, user, posts, setPosts, fetchPosts }) {
     };
 
     const [userGeneratedPost, setUserGeneratedPost] = React.useState(post.user === user.username);
+    const [liked, setLiked] = React.useState(false);
+    
+    React.useEffect(() => {
+        if (post.hasOwnProperty('likedBy') && post.likedBy.includes(user.username)) {
+            setLiked(true);
+        }
+    }, []);
+
     const [hovering, setHovering] = React.useState(false);
 
     const handleDelete = (id) => {
@@ -53,15 +61,29 @@ export default function Post({ post, user, posts, setPosts, fetchPosts }) {
     };
 
     const handleLike = () => {
-        fetch(`/api/posts/${post._id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({action: 'like'}),
-            });
+        if (liked) {
+            fetch(`/api/posts/${post._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({action: 'unlike', user: user.username,}),
+                });
 
-        post.likes += 1;
+            post.likes -= 1;
+        } else {
+            fetch(`/api/posts/${post._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({action: 'like', user: user.username,}),
+                });
+    
+            post.likes += 1;
+        }
+
+        setLiked(!liked);
 
         setTimeout(() => {
             fetchPosts();
@@ -93,7 +115,7 @@ export default function Post({ post, user, posts, setPosts, fetchPosts }) {
             <div className={styles.cardFooter}>
                 <div className={styles.cardLikes}>
                     <span>{formatLikes(post.likes)}</span>
-                    <button className={styles.cardLikeButton} onClick={handleLike}>
+                    <button className={liked ? styles.cardLikeButtonLiked : styles.cardLikeButton} onClick={handleLike}>
                         <FavoriteIcon />
                     </button>
                 </div>

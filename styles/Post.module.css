@@ -97,3 +97,22 @@
 .cardLikeButton:hover {
     color: #f44747;
 }
+
+.cardLikeButtonLiked {
+    border: none;
+    background-color: transparent;
+    color: #f44747;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.cardLikeButtonLiked:focus {
+    outline: none;
+}
+
+.cardLikeButtonLiked:hover {
+    color: #666;
+}

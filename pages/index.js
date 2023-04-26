@@ -114,6 +114,23 @@ export default function Home() {
     const res = await fetch('/api/posts');
     const data = await res.json();
     setPosts(data);
+
+    setUser(prevState => ({
+      ...prevState,
+      likeCount: 0,
+      postCount: 0
+    }));
+
+    posts.forEach(post => {
+      if (post.user === user.username) {
+
+        setUser(prevState => ({
+          ...prevState,
+          likeCount: prevState.likeCount + post.likes,
+          postCount: prevState.postCount + 1
+        }));
+      }
+    });
   }
 
   React.useEffect(() => {

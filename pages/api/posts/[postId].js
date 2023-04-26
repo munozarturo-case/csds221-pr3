@@ -31,17 +31,41 @@ async function handlePut(req, res) {
     const client = await getClient();
     const posts = client.db().collection("posts");
 
+    if (req.body.user.length == 0) {
+        res.status(400).json({ error: "Bad request, user can't be empty" });
+        return;
+    }
+
+    const result = await posts.findOne({ _id: new mongodb.ObjectId(req.query.postId) });
+
+    if (result == null) {
+        res.status(400).json({ error: "Post not found" });
+        return;
+    }
+
     switch (req.body.action) {
         case "like":
-            await posts.updateOne({ _id: new mongodb.ObjectId(req.query.postId) }, { $inc: { likes: 1 } });
+            if (result.likedBy.includes(req.body.user)) {
+                res.status(400).json({ error: "Post already liked" });
+                return;
+            }
+
+            await posts.updateOne({ _id: new mongodb.ObjectId(req.query.postId) }, { $inc: { likes: 1 }, $push: { likedBy: req.body.user } });
             break;
         case "unlike":
-            await posts.updateOne({ _id: new mongodb.ObjectId(req.query.postId) }, { $inc: { likes: -1 } });
+            if (!result.likedBy.includes(req.body.user)) {
+                res.status(400).json({ error: "Post already not liked" });
+                return;
+            }
+
+            await posts.updateOne({ _id: new mongodb.ObjectId(req.query.postId) }, { $inc: { likes: -1}, $pull: { likedBy: req.body.user } });
             break;
         default:
             res.status(400).json({ error: "Bad request, action must be like or unlike" });
             return;
     }
+
+    res.status(200).json({ status: "ok" });
 
     client.close();
 };

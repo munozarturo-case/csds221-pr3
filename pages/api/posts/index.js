@@ -16,7 +16,8 @@ async function handlePost(req, res) {
         user: req.body.user,
         title: req.body.title,
         body: req.body.body,
-        likes: 0
+        likes: 0,
+        likedBy: [],
     }
 
     if (post.user.length == 0 || post.title.length == 0 || post.body.length == 0) {
@@ -26,6 +27,11 @@ async function handlePost(req, res) {
 
     if (post.likes != 0) {
         res.status(400).json({ error: "Likes must be zero" });
+        return;
+    }
+
+    if (post.likedBy.length != 0) {
+        res.status(400).json({ error: "Liked by must be empty" });
         return;
     }
 
