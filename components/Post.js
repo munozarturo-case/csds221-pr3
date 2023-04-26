@@ -87,6 +87,7 @@ export default function Post({ post, user, posts, setPosts, fetchPosts }) {
                 )}
             </div>
             <div className={styles.cardBody}>
+                <h3 className={styles.cardSubtitle}>{post.title}</h3>
                 <p className={styles.cardText}>{post.body}</p>
             </div>
             <div className={styles.cardFooter}>
