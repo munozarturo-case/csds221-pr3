@@ -145,10 +145,10 @@ export default function Home() {
       <main className={styles.pageContent}>
         <div className={styles.content}>
           <div className={styles.userInteractions}>
-            <UserInteractions user={user} setUser={setUser} posts={posts} setPosts={setPosts} />
+            <UserInteractions user={user} setUser={setUser} posts={posts} setPosts={setPosts} fetchPosts={fetchPosts} />
           </div>
           <div className={styles.postsContent}>
-            <PostBoard posts={posts} />
+            <PostBoard posts={posts} user={user} setPosts={setPosts} fetchPosts={fetchPosts} />
           </div>
         </div>
       </main>

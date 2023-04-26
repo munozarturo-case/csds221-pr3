@@ -35,6 +35,17 @@
     align-items: center;
 }
 
+.cardDeleteButton {
+    border: none;
+    background-color: transparent;
+    color: #666;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
 .cardUser {
     margin: 0;
     color: #666;

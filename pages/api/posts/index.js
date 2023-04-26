@@ -6,9 +6,9 @@ const mongodb = require("mongodb");
 
 const uri = Utils.getDatabaseURI(process.env.MONGODB_USER, process.env.MONGODB_PASS, process.env.MONGODB_DB);
 
-async function getPostsCollection() {
+async function getClient() {
     const client = await mongodb.MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    return client.db().collection("posts");
+    return client;
 }
 
 async function handlePost(req, res) {
@@ -31,15 +31,19 @@ async function handlePost(req, res) {
 
     post.date = new Date();
 
-    const posts = await getPostsCollection();
+    const client = await getClient();
+    const posts = client.db().collection("posts");
 
     const result = await posts.insertOne(post);
 
     res.status(200).json({ id: result.insertedId });
+
+    client.close();
 };
 
 async function handleGet(req, res) {
-    const posts = await getPostsCollection();
+    const client = await getClient();
+    const posts = client.db().collection("posts");
 
     const result = await posts.find({})
                           .sort({ date: -1 })
@@ -47,6 +51,8 @@ async function handleGet(req, res) {
                           .toArray();
 
     res.status(200).json(result);
+
+    client.close();
 };
 
 export default function handler(req, res) {

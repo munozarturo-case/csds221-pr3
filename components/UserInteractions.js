@@ -7,7 +7,7 @@ import React from 'react';
 
 import Thought from './Thought';
 
-export default function UserInteractions({ user, setUser, posts, setPosts }) {
+export default function UserInteractions({ user, setUser, posts, setPosts, fetchPosts }) {
     const [showPopup, setShowPopup] = React.useState(false);
     const [postTitle, setPostTitle] = React.useState('');
     const [postBody, setPostBody] = React.useState('');
@@ -44,6 +44,10 @@ export default function UserInteractions({ user, setUser, posts, setPosts }) {
         setShowPopup(false);
         setPostTitle('');
         setPostBody('');
+
+        setTimeout(() => {
+            fetchPosts();
+        }, 2000);
     };
 
     return (

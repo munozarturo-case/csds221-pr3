@@ -3,7 +3,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import UserAvatar from '@/components/UserAvatar';
 
-export default function Post({ post }) {
+import React from 'react';
+
+export default function Post({ post, user, posts, setPosts, fetchPosts }) {
     const formatDate = (date) => {
         const dateObject = new Date(date);
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -32,8 +34,44 @@ export default function Post({ post }) {
         }
     };
 
+    const [userGeneratedPost, setUserGeneratedPost] = React.useState(post.user === user.username);
+    const [hovering, setHovering] = React.useState(false);
+
+    const handleDelete = (id) => {
+        fetch(`/api/posts/${id}`, {
+            method: 'DELETE',
+        });
+
+        const newPosts = posts.filter(post => post._id !== id);
+        setPosts(newPosts);
+
+        setUserGeneratedPost(false);
+
+        setTimeout(() => {
+            fetchPosts();
+        }, 2000);
+    };
+
+    const handleLike = () => {
+        fetch(`/api/posts/${post._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({action: 'like'}),
+            });
+
+        post.likes += 1;
+
+        setTimeout(() => {
+            fetchPosts();
+        }, 2000);
+    }
+    
     return (
-        <div className={styles.card}>
+        <div className={styles.card} 
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}>
             <div className={styles.cardHeader}>
                 <div className={styles.cardAvatar}>
                     <UserAvatar seed={post.user} />
@@ -42,6 +80,11 @@ export default function Post({ post }) {
                     <h2 className={styles.cardTitle}>{`@${post.user}`}</h2>
                     <p className={styles.cardDate}>{formatDate(post.date)}</p>
                 </div>
+                {userGeneratedPost && hovering && post._id !== undefined && (
+                    <button onClick={() => handleDelete(post._id)} className={styles.cardDeleteButton}>
+                        Delete
+                    </button>
+                )}
             </div>
             <div className={styles.cardBody}>
                 <p className={styles.cardText}>{post.body}</p>
@@ -49,7 +92,7 @@ export default function Post({ post }) {
             <div className={styles.cardFooter}>
                 <div className={styles.cardLikes}>
                     <span>{formatLikes(post.likes)}</span>
-                    <button className={styles.cardLikeButton}>
+                    <button className={styles.cardLikeButton} onClick={handleLike}>
                         <FavoriteIcon />
                     </button>
                 </div>
