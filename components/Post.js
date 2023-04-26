@@ -77,7 +77,7 @@ export default function Post({ post, user, posts, setPosts, fetchPosts }) {
                     <UserAvatar seed={post.user} />
                 </div>
                 <div className={styles.cardUsername}>
-                    <h2 className={styles.cardTitle}>{`@${post.user}`}</h2>
+                    <h2 className={styles.cardTitle}>{`@${post.user}${post.user === user.username ? ' (You)' : ''}`}</h2>
                     <p className={styles.cardDate}>{formatDate(post.date)}</p>
                 </div>
                 {userGeneratedPost && hovering && post._id !== undefined && (
