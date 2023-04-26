@@ -6,14 +6,6 @@ const mongodb = require("mongodb");
 
 const uri = Utils.getDatabaseURI(process.env.MONGODB_USER, process.env.MONGODB_PASS);
 
-async function loadPostsCollection() {
-    const client = await mongodb.MongoClient.connect(uri, {
-        useNewUrlParser: true
-    });
-
-    return client.db("cluster-us-east").collection("posts");
-};
-
 async function handleGet(req, res) {
 
 };
@@ -23,7 +15,7 @@ async function handlePost(req, res) {
 };
 
 async function handleDelete(req, res) {
-    
+
 };
 
 export default function handler(req, res) {

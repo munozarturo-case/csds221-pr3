@@ -7,7 +7,7 @@ import React from 'react';
 
 import Thought from './Thought';
 
-export default function UserInteractions({ user, setUser }) {
+export default function UserInteractions({ user, setUser, posts, setPosts }) {
     const [showPopup, setShowPopup] = React.useState(false);
     const [postTitle, setPostTitle] = React.useState('');
     const [postBody, setPostBody] = React.useState('');
@@ -23,8 +23,24 @@ export default function UserInteractions({ user, setUser }) {
     };
 
     const handleConfirm = () => {
-        console.log('Title:', postTitle);
-        console.log('Body:', postBody);
+        const newPost = {
+            user: user.username,
+            title: postTitle,
+            body: postBody,
+            date: new Date(),
+            likes: 0,
+        };
+
+        fetch('/api/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newPost),
+        });
+
+        setPosts([newPost, ...posts]);
+
         setShowPopup(false);
         setPostTitle('');
         setPostBody('');
