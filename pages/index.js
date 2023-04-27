@@ -32,7 +32,6 @@ export default function Home() {
 
     posts.forEach(post => {
       if (post.user === user.username) {
-
         setUser(prevState => ({
           ...prevState,
           likeCount: prevState.likeCount + post.likes,

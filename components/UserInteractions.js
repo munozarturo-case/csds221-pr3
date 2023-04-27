@@ -27,7 +27,6 @@ export default function UserInteractions({ user, setUser, posts, setPosts, fetch
     const handleConfirm = () => {
         if (postTitle === '' && postBody === '') {
             toastr.info("You can't share an empty thought.");
-            showPopup(false);
         } else {
             const newPost = {
                 user: user.username,
@@ -53,7 +52,7 @@ export default function UserInteractions({ user, setUser, posts, setPosts, fetch
                 });
         
                 setPosts([newPost, ...posts]);
-        
+
                 setShowPopup(false);
                 setPostTitle('');
                 setPostBody('');
