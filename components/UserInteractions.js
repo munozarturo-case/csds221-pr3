@@ -61,6 +61,10 @@ export default function UserInteractions({ user, setUser, posts, setPosts, fetch
                 setTimeout(() => {
                     fetchPosts();
                 }, 2000);
+
+                setTimeout(() => {
+                    fetchPosts();
+                }, 5000);
             }
         }
     };

@@ -63,7 +63,11 @@ export default function Post({ post, user, posts, setPosts, fetchPosts, setUser 
 
         setTimeout(() => {
             fetchPosts();
-        }, 2000);
+        }, 3000);
+
+        setTimeout(() => {
+            fetchPosts();
+        }, 5000);
     };
 
     const handleLike = () => {
