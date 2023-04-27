@@ -5,6 +5,8 @@ import UserAvatar from '@/components/UserAvatar';
 
 import React from 'react';
 
+const toastr = require('toastr');
+
 export default function Post({ post, user, posts, setPosts, fetchPosts }) {
     const formatDate = (date) => {
         const dateObject = new Date(date);
@@ -54,6 +56,8 @@ export default function Post({ post, user, posts, setPosts, fetchPosts }) {
         setPosts(newPosts);
 
         setUserGeneratedPost(false);
+
+        toastr.success('Your post has been deleted.');
 
         setTimeout(() => {
             fetchPosts();
