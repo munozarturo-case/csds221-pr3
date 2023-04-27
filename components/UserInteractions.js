@@ -52,6 +52,7 @@ export default function UserInteractions({ user, setUser, posts, setPosts, fetch
                 });
         
                 setPosts([newPost, ...posts]);
+                setUser({ ...user, posts: user.posts + 1 });
 
                 setShowPopup(false);
                 setPostTitle('');
@@ -84,7 +85,6 @@ export default function UserInteractions({ user, setUser, posts, setPosts, fetch
                         setBody={setPostBody} 
                         handleConfirm={handleConfirm}
                         handleCancel={handleCancel}
-                        setUser={setUser}
                     />
                 </div>)}
             </div>

@@ -73,7 +73,7 @@ export default function Home() {
             <UserInteractions user={user} setUser={setUser} posts={posts} setPosts={setPosts} fetchPosts={fetchPosts} />
           </div>
           <div className={styles.postsContent}>
-            <PostBoard posts={posts} user={user} setPosts={setPosts} fetchPosts={fetchPosts} />
+            <PostBoard posts={posts} user={user} setPosts={setPosts} setUser={setUser} fetchPosts={fetchPosts} />
           </div>
         </div>
       </main>
