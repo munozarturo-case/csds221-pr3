@@ -7,7 +7,7 @@ import React from 'react';
 
 const toastr = require('toastr');
 
-export default function Post({ post, user, posts, setPosts, fetchPosts }) {
+export default function Post({ post, user, posts, setPosts, fetchPosts, setUser }) {
     const formatDate = (date) => {
         const dateObject = new Date(date);
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -58,6 +58,8 @@ export default function Post({ post, user, posts, setPosts, fetchPosts }) {
         setUserGeneratedPost(false);
 
         toastr.success('Your post has been deleted.');
+
+        setUser({ ...user, posts: user.posts - 1 });
 
         setTimeout(() => {
             fetchPosts();

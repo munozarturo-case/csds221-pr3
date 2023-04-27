@@ -84,6 +84,7 @@ export default function UserInteractions({ user, setUser, posts, setPosts, fetch
                         setBody={setPostBody} 
                         handleConfirm={handleConfirm}
                         handleCancel={handleCancel}
+                        setUser={setUser}
                     />
                 </div>)}
             </div>
