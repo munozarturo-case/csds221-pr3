@@ -1,5 +1,31 @@
 # Thought Share
 
-A web app that allows users to share 'thoughts', like the 'thoughts' of others, as well as delete these 'thoughts'.
+## Create a post
 
-![Image of Thought Share](./public/thought-share.JPG)
+### Press "Share Something With The World"
+
+![Image of sharing thoughts ](./demo_images/though-share-1.JPG)
+
+### Add a Title and Body to your thought
+
+![Image of sharing thoughts ](./demo_images/thought-share-2.JPG)
+
+### Share It
+
+![Image of sharing thoughts ](./demo_images/thought-share-3.JPG)
+
+## Delete
+
+### Delete a post by hovering over it and selecting delete
+
+![Image of sharing thoughts ](./demo_images/thought-share-4.JPG)
+
+### The post gets deleted
+
+![Image of sharing thoughts ](./demo_images/thought-share-6.JPG)
+
+## Like A Post
+
+### Like and Unlike a post by pressing the like button
+
+![Image of sharing thoughts ](./demo_images/thought-share-5.JPG)
